@@ -43,7 +43,15 @@ app.post('/api/shorturl', (req, res) => {
 });
 
 
+app.get('/api/shorturl/:short_url', (req, res) => {
+  const { short_url } = req.params;
 
+  if (!urlDatabase[short_url]) {
+    return res.json({ error: 'short_url not found' });
+  }
+  
+  res.redirect(urlDatabase[short_url]);
+});
 
 
 app.listen(port, function() {
